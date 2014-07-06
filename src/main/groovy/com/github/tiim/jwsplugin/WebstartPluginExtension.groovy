@@ -1,4 +1,4 @@
-package ch.github.tiim.jwsplugin
+package com.github.tiim.jwsplugin
 
 /**
  * Every field which is documented with 'value' can be the object directly, a closure or a callable

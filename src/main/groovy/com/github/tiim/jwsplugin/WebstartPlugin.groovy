@@ -1,4 +1,4 @@
-package ch.github.tiim.jwsplugin
+package com.github.tiim.jwsplugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

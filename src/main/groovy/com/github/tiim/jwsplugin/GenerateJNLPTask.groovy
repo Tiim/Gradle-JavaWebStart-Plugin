@@ -1,4 +1,4 @@
-package ch.github.tiim.jwsplugin
+package com.github.tiim.jwsplugin
 
 import groovy.xml.MarkupBuilder
 import org.gradle.api.DefaultTask
