@@ -113,7 +113,7 @@ class GenerateJNLPTask extends DefaultTask {
                     }
                 }
                 if (getValue(t.offlineAllowed))
-                    'offline-allowed'
+                    'offline-allowed'()
             }
             if (getValue(t.updateCheck) != null || getValue(t.updatePolicy) != null) {
                 def up = [:]
@@ -131,9 +131,7 @@ class GenerateJNLPTask extends DefaultTask {
                 if (getValue(t.allPermissions) != null) {
                     def boolean ap = getValue(t.allPermissions)
                     if (ap)
-                        'all-permissions' {
-
-                        }
+                        'all-permissions'()
                 }
                 if (getValue(t.permissions) != null)
                     getValue(t.permissions).each {
