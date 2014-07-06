@@ -86,11 +86,11 @@ class GenerateJNLPTask extends DefaultTask {
         xml.jnlp(jnlp) {
             'information' {
                 "title"(getValue(t.title))
-                if (t.vendor != null && getValue(t.vendor) != null)
+                if (getValue(t.vendor) != null)
                     'vendor'(getValue(t.vendor))
-                if (t.homepage != null && getValue(t.homepage) != null)
+                if (getValue(t.homepage) != null)
                     'homepage'(href: getValue(t.homepage))
-                if (t.appDescription != null && getValue(t.appDescription) != null) {
+                if (getValue(t.appDescription) != null) {
                     def d = getValue(t.appDescription)
                     if (d instanceof String) {
                         'description'(kind: 'short', d)
@@ -101,27 +101,26 @@ class GenerateJNLPTask extends DefaultTask {
                         }
                     }
                 }
-                if (t.icon != null && getValue(t.icon) != null && !(getValue(t.icon) as List).isEmpty()) {
+                if (getValue(t.icon) != null && !(getValue(t.icon) as List).isEmpty()) {
                     t.icon.each {
                         'icon'(it)
                     }
                 }
-                if (t.offlineAllowed != null && getValue(t.offlineAllowed))
+                if (getValue(t.offlineAllowed))
                     'offline-allowed'
             }
-            if ((t.updateCheck != null && getValue(t.updateCheck) != null) ||
-                    (t.updatePolicy != null && getValue(t.updatePolicy) != null)) {
+            if (getValue(t.updateCheck) != null || getValue(t.updatePolicy) != null) {
                 def up = [:]
-                if (t.updateCheck != null && getValue(t.updateCheck) != null) {
+                if (getValue(t.updateCheck) != null) {
                     up.put('check', getValue(t.updateCheck))
                 }
-                if (t.updatePolicy != null && getValue(t.updatePolicy) != null) {
+                if (getValue(t.updatePolicy) != null) {
                     up.put('policy', getValue(t.updatePolicy))
                 }
                 'update'(up)
             }
             resources {
-                if (t.javaVersion != null)
+                if (getValue(t.javaVersion) != null)
                     'java'(version: getValue(t.javaVersion))
                 files.each {
                     'jar'(href: it)
