@@ -15,10 +15,11 @@ class WebstartPlugin implements Plugin<Project> {
         project.apply(plugin: 'java')
         project.apply(plugin: 'application')
 
-
         def ext = project.extensions.create('webstart', WebstartPluginExtension)
         defaultValues(ext, project)
-        addJNLPTask(project, ext)
+        def t = addJNLPTask(project, ext)
+
+        println project.tasks.getByPath("build").dependsOn(t)
 
     }
 
@@ -42,6 +43,8 @@ class WebstartPlugin implements Plugin<Project> {
         t.javaVersion = { ext.javaVersion }
         t.updateCheck = { ext.updateCheck }
         t.updatePolicy = { ext.updatePolicy }
+
+        return t
     }
 
     static def defaultValues(WebstartPluginExtension ext, Project pro) {
