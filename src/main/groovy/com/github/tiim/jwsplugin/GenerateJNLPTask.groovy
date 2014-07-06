@@ -127,7 +127,6 @@ class GenerateJNLPTask extends DefaultTask {
             }
 
             security {
-                println getValue(t.allPermissions)
                 if (getValue(t.allPermissions) != null) {
                     def boolean ap = getValue(t.allPermissions)
                     if (ap)
