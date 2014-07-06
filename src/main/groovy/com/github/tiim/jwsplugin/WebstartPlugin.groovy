@@ -2,7 +2,6 @@ package com.github.tiim.jwsplugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.plugins.ApplicationPluginConvention
 import org.gradle.api.plugins.JavaPlugin
 
 /**
@@ -46,7 +45,6 @@ class WebstartPlugin implements Plugin<Project> {
     }
 
     static def defaultValues(WebstartPluginExtension ext, Project pro) {
-        def appPlugin = pro.extensions.findByName("application") as ApplicationPluginConvention
         ext.title = { pro.archivesBaseName }
         ext.mainClass = { pro.mainClassName }
         ext.javaVersion = { pro.targetCompatibility.toString() }

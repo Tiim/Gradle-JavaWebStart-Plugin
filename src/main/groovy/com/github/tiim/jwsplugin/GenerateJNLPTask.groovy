@@ -2,12 +2,7 @@ package com.github.tiim.jwsplugin
 
 import groovy.xml.MarkupBuilder
 import org.gradle.api.DefaultTask
-import org.gradle.api.plugins.JavaPlugin
-import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFiles
-import org.gradle.api.tasks.OutputFile
-import org.gradle.api.tasks.TaskAction
-import org.gradle.api.tasks.Optional
+import org.gradle.api.tasks.*
 
 import java.util.concurrent.Callable
 
