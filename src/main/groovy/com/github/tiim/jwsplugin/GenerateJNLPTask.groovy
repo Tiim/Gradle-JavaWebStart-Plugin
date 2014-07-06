@@ -70,28 +70,28 @@ class GenerateJNLPTask extends DefaultTask {
         outputFile.parentFile.mkdirs()
         def writer = new FileWriter(outputFile)
         def xml = new MarkupBuilder(writer)
-        makeXml(xml)
+        makeXml(xml, this)
         writer.close()
     }
 
-    def makeXml(MarkupBuilder xml) {
+    def static makeXml(MarkupBuilder xml, GenerateJNLPTask t) {
         def jnlp = [:]
-        jnlp.put('spec', getValue(spec))
-        jnlp.put('codebase', getValue(codebase))
-        jnlp.put('href', getValue(jnlpHref))
-        jnlp.put('version', getValue(version))
+        jnlp.put('spec', getValue(t.spec))
+        jnlp.put('codebase', getValue(t.codebase))
+        jnlp.put('href', getValue(t.jnlpHref))
+        jnlp.put('version', getValue(t.version))
 
-        def files = getValue(jarFiles).collect { "$it.name" }
+        def files = getValue(t.jarFiles).collect { "$it.name" }
 
         xml.jnlp(jnlp) {
             'information' {
-                'title'(getValue(title))
-                if (vendor != null && getValue(vendor) != null)
-                    'vendor'(getValue(vendor))
-                if (homepage != null && getValue(homepage) != null)
-                    'homepage'(href: getValue(homepage))
-                if (appDescription != null && getValue(appDescription) != null) {
-                    def d = getValue(appDescription)
+                "title"(getValue(t.title))
+                if (t.vendor != null && getValue(t.vendor) != null)
+                    'vendor'(getValue(t.vendor))
+                if (t.homepage != null && getValue(t.homepage) != null)
+                    'homepage'(href: getValue(t.homepage))
+                if (t.appDescription != null && getValue(t.appDescription) != null) {
+                    def d = getValue(t.appDescription)
                     if (d instanceof String) {
                         'description'(kind: 'short', d)
                     } else if (d instanceof Map) {
@@ -101,33 +101,33 @@ class GenerateJNLPTask extends DefaultTask {
                         }
                     }
                 }
-                if (icon != null && getValue(icon) != null && !(getValue(icon) as List).isEmpty()) {
-                    icon.each {
+                if (t.icon != null && getValue(t.icon) != null && !(getValue(t.icon) as List).isEmpty()) {
+                    t.icon.each {
                         'icon'(it)
                     }
                 }
-                if (offlineAllowed != null && getValue(offlineAllowed))
+                if (t.offlineAllowed != null && getValue(t.offlineAllowed))
                     'offline-allowed'
             }
-            if ((updateCheck != null && getValue(updateCheck) != null) ||
-                    (updatePolicy != null && getValue(updatePolicy) != null)) {
+            if ((t.updateCheck != null && getValue(t.updateCheck) != null) ||
+                    (t.updatePolicy != null && getValue(t.updatePolicy) != null)) {
                 def up = [:]
-                if (updateCheck != null && getValue(updateCheck)) {
-                    up.put('check', getValue(updateCheck))
+                if (t.updateCheck != null && getValue(t.updateCheck) != null) {
+                    up.put('check', getValue(t.updateCheck))
                 }
-                if (updatePolicy != null && getValue(updatePolicy) != null) {
-                    up.put('policy', getValue(updatePolicy))
+                if (t.updatePolicy != null && getValue(t.updatePolicy) != null) {
+                    up.put('policy', getValue(t.updatePolicy))
                 }
                 'update'(up)
             }
             resources {
-                if (javaVersion != null)
-                    'java'(version: getValue(javaVersion))
+                if (t.javaVersion != null)
+                    'java'(version: getValue(t.javaVersion))
                 files.each {
                     'jar'(href: it)
                 }
             }
-            'application-desc'('main-class': getValue(mainClass))
+            'application-desc'('main-class': getValue(t.mainClass))
         }
     }
 
