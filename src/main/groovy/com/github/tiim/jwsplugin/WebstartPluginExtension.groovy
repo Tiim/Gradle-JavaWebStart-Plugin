@@ -112,4 +112,16 @@ class WebstartPluginExtension {
      * the application is launched. Values can be always, prompt-update, or prompt-run.
      */
     def updatePolicy = "prompt-update"
+
+    /**
+     * Value.
+     * Requests that the application be run with all permissions.
+     */
+    def allPermissions = false
+
+    /**
+     * Value.
+     * List of permissions that the app needs to run.
+     */
+    def permissions = null
 }

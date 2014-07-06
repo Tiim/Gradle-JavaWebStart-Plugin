@@ -64,6 +64,12 @@ class GenerateJNLPTask extends DefaultTask {
     @Input
     def updatePolicy
 
+    @Input
+    def allPermissions
+
+    @Optional
+    @Input
+    def permissions
 
     @TaskAction
     def generateJNLP() {
@@ -119,6 +125,22 @@ class GenerateJNLPTask extends DefaultTask {
                 }
                 'update'(up)
             }
+
+            security {
+                println getValue(t.allPermissions)
+                if (getValue(t.allPermissions) != null) {
+                    def boolean ap = getValue(t.allPermissions)
+                    if (ap)
+                        'all-permissions' {
+
+                        }
+                }
+                if (getValue(t.permissions) != null)
+                    getValue(t.permissions).each {
+                        'j2ee-application-client-permissions'(it)
+                    }
+            }
+
             resources {
                 if (getValue(t.javaVersion) != null)
                     'java'(version: getValue(t.javaVersion))

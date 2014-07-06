@@ -43,7 +43,8 @@ class WebstartPlugin implements Plugin<Project> {
         t.javaVersion = { ext.javaVersion }
         t.updateCheck = { ext.updateCheck }
         t.updatePolicy = { ext.updatePolicy }
-
+        t.allPermissions = { ext.allPermissions }
+        t.permissions = { ext.permissions }
         return t
     }
 
